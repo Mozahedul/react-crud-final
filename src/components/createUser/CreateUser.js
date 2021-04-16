@@ -19,8 +19,11 @@ const CreateUser = () => {
       firstName !== "" &&
       firstName.length >= 5 &&
       lastName !== "" &&
+      lastName.length >= 5 &&
       email !== "" &&
-      password !== ""
+      email.length >= 12 &&
+      password !== "" &&
+      password.length >= 5
     ) {
       dispatch({
         type: "ADD_USER",
@@ -37,7 +40,9 @@ const CreateUser = () => {
       setEmail("");
       setPassword("");
       history.push("/view");
+      // alert("form submitted successfully");
     } else {
+      // first Name validation
       if (firstName === "" || firstName.length < 5) {
         document.getElementById("fNameErrMsg").innerHTML = `${
           firstName === ""
@@ -45,6 +50,8 @@ const CreateUser = () => {
             : "First Name should be greater than 4 characters"
         }`;
       }
+
+      // last name validation
       if (lastName === "" || lastName.length < 5) {
         document.getElementById("lNameErrMsg").innerHTML = `${
           lastName === ""
@@ -52,17 +59,30 @@ const CreateUser = () => {
             : "Last Name should be greater than 4 characters"
         }`;
       }
-      if (email === "") {
+
+      // email validation
+      if (email === "" || email.length < 12) {
+        document.getElementById("emailNameErrMsg").innerHTML = `
+          ${
+            email === ""
+              ? "Insert email Please!"
+              : "Insert atleast 2 characters before @"
+          }
+        `;
+      } else if (!email.includes("@")) {
         document.getElementById("emailNameErrMsg").innerHTML =
-          "Insert email Please!";
+          "Invalid email, please insert @";
       }
+
+      // password validation
       if (password === "" || password.length < 5) {
         document.getElementById("pWordNameErrMsg").innerHTML = `${
-          password === ""
-            ? "Insert Password Please!"
-            : "Password should be atleast 5 characters"
+          password !== ""
+            ? "Password should be atleast 5 characters"
+            : "Insert Password Please!"
         }`;
       }
+
       history.push("/create");
     }
   };

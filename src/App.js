@@ -7,6 +7,7 @@ import CreateUser from "./components/createUser/CreateUser";
 import ViewUser from "./components/viewUser/ViewUser";
 import EditUser from "./components/editUser/EditUser";
 import { useStateValue } from "./contextApi/stateProvider";
+import Error404 from "./components/error/Error404";
 
 function App() {
   const [{ userCount }, dispatch] = useStateValue();
@@ -49,6 +50,9 @@ function App() {
           <Route exact path="/">
             <Header />
             <Home />
+          </Route>
+          <Route>
+            <Error404 />
           </Route>
         </Switch>
       </div>
